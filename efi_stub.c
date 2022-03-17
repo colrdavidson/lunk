@@ -116,7 +116,7 @@ EFI_STATUS efi_main(EFI_HANDLE img_handle, EFI_SYSTEM_TABLE *st) {
 /*
 
 	// This block kicks off the kernel, not fully tested!
-	// Memory map loading must be followed ExitBootServices
+	// Memory map loading must be followed immediately with ExitBootServices
 
 	size_t map_key;
 	// Load latest memory map
