@@ -113,6 +113,11 @@ EFI_STATUS efi_main(EFI_HANDLE img_handle, EFI_SYSTEM_TABLE *st) {
 		println(st, L"Loaded the kernel and loader!");
 	}
 
+/*
+
+	// This block kicks off the kernel, not fully tested!
+	// Memory map loading must be followed ExitBootServices
+
 	size_t map_key;
 	// Load latest memory map
 	{
@@ -145,6 +150,7 @@ EFI_STATUS efi_main(EFI_HANDLE img_handle, EFI_SYSTEM_TABLE *st) {
 	println(st, L"Starting the loader");
 	// Boot the loader
 	((void (*)()) LOADER_BUFFER_LOC)();
+*/
 
 	return 0;
 }
