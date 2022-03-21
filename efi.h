@@ -233,7 +233,7 @@ typedef EFI_TPL (EFIAPI *EFI_RAISE_TPL) (IN EFI_TPL NewTpl);
 typedef EFI_TPL (EFIAPI *EFI_RESTORE_TPL) (IN EFI_TPL OldTpl);
 typedef EFI_STATUS (EFIAPI *EFI_ALLOCATE_PAGES) (IN EFI_ALLOCATE_TYPE Type, IN EFI_MEMORY_TYPE MemoryType, IN size_t Pages, IN OUT EFI_PHYSICAL_ADDRESS *Memory);
 typedef EFI_STATUS (EFIAPI *EFI_FREE_PAGES) (IN EFI_PHYSICAL_ADDRESS Memory, IN size_t Pages);
-typedef EFI_STATUS (EFIAPI *EFI_GET_MEMORY_MAP) (IN OUT size_t *MemoryMapSize, OUT EFI_MEMORY_DESCRIPTOR *MemoryMap, OUT size_t *MapKey, OUT size_t *DescriptorSize, OUT size_t *DescriptorVersion);
+typedef EFI_STATUS (EFIAPI *EFI_GET_MEMORY_MAP) (IN OUT size_t *MemoryMapSize, OUT EFI_MEMORY_DESCRIPTOR *MemoryMap, OUT size_t *MapKey, OUT size_t *DescriptorSize, OUT uint32_t *DescriptorVersion);
 typedef EFI_STATUS (EFIAPI *EFI_ALLOCATE_POOL) (IN EFI_MEMORY_TYPE PoolType, IN size_t Size, OUT void **Buffer);
 typedef EFI_STATUS (EFIAPI *EFI_FREE_POOL) (IN void *Buffer);
 typedef EFI_STATUS (EFIAPI *EFI_CREATE_EVENT) (IN uint32_t Type, IN EFI_TPL NotifyTpl, IN EFI_EVENT_NOTIFY NotifyFunction OPTIONAL, IN void *NotifyContext OPTIONAL, OUT EFI_EVENT *Event);

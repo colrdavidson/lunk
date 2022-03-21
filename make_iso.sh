@@ -6,8 +6,8 @@ mmd -i bin/efi.img ::/EFI
 mmd -i bin/efi.img ::/EFI/BOOT
 mcopy -i bin/efi.img bin/BOOTX64.EFI ::/EFI/BOOT
 mcopy -i bin/efi.img startup.nsh ::/
-#mcopy -i bin/efi.img bin/kernel.o ::/
-#mcopy -i bin/efi.img bin/loader.bin ::/
+mcopy -i bin/efi.img bin/kernel.o ::/
+mcopy -i bin/efi.img bin/loader.bin ::/
 
 rm -rf bin/iso bin/cdimage.iso
 mkdir bin/iso
