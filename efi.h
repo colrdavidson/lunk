@@ -147,7 +147,6 @@ typedef enum {
 	EfiMaxMemoryType
 } EFI_MEMORY_TYPE;
 
-
 typedef struct {
 	int32_t MaxMode;
 	int32_t Mode;
@@ -359,6 +358,67 @@ typedef struct {
 
 typedef EFI_STATUS (EFIAPI *EFI_IMAGE_UNLOAD) (IN EFI_HANDLE ImageHandle);
 
+#define EFI_GRAPHICS_OUTPUT_PROTOCOL_GUID {0x9042a9de,0x23dc,0x4a38, {0x96,0xfb,0x7a,0xde,0xd0,0x80,0x51,0x6a}}
+
+struct _EFI_GRAPHICS_OUTPUT_PROTOCOL;
+
+typedef struct {
+	uint8_t Blue;
+	uint8_t Green;
+	uint8_t Red;
+	uint8_t Reserved;
+} EFI_GRAPHICS_OUTPUT_BLT_PIXEL;
+
+typedef enum {
+	EfiBltVideoFill,
+	EfiBltVideoToBltBuffer,
+	EfiBltBufferToVideo,
+	EfiGraphicsOutputBltOperationMax,
+} EFI_GRAPHICS_OUTPUT_BLT_OPERATION;
+
+typedef enum {
+	PixelRedGreenBlueReserved8BitPerColor,
+	PixelBlueGreenRedReserved8BitPerColor,
+	PixelBitMask,
+	PixelBltOnly,
+	PixelFormatMax,
+} EFI_GRAPHICS_PIXEL_FORMAT;
+
+typedef struct {
+	uint32_t RedMask;
+	uint32_t GreenMask;
+	uint32_t BlueMask;
+	uint32_t ReservedMask;
+} EFI_PIXEL_BITMASK;
+
+typedef struct {
+	uint32_t Version;
+	uint32_t HorizontalResolution;
+	uint32_t VerticalResolution;
+	EFI_GRAPHICS_PIXEL_FORMAT PixelFormat;
+	EFI_PIXEL_BITMASK PixelInformation;
+	uint32_t PixelsPerScanline;
+} EFI_GRAPHICS_OUTPUT_MODE_INFORMATION;
+
+typedef struct {
+	uint32_t MaxMode;
+	uint32_t Mode;
+	EFI_GRAPHICS_OUTPUT_MODE_INFORMATION *Info;
+	size_t SizeOfInfo;
+	EFI_PHYSICAL_ADDRESS FrameBufferBase;
+	size_t FrameBufferSize;
+} EFI_GRAPHICS_OUTPUT_PROTOCOL_MODE;
+
+typedef EFI_STATUS (EFIAPI *EFI_GRAPHICS_OUTPUT_PROTOCOL_QUERY_MODE) (IN struct _EFI_GRAPHICS_OUTPUT_PROTOCOL *This, IN uint32_t ModeNumber, OUT size_t *SizeOfInfo, OUT EFI_GRAPHICS_OUTPUT_MODE_INFORMATION **Info);
+typedef EFI_STATUS (EFIAPI *EFI_GRAPHICS_OUTPUT_PROTOCOL_SET_MODE) (IN struct _EFI_GRAPHICS_OUTPUT_PROTOCOL *This, IN uint32_t ModeNumber);
+typedef EFI_STATUS (EFIAPI *EFI_GRAPHICS_OUTPUT_PROTOCOL_BLT) (IN struct _EFI_GRAPHICS_OUTPUT_PROTOCOL *This, IN OUT EFI_GRAPHICS_OUTPUT_BLT_PIXEL *BltBuffer, IN EFI_GRAPHICS_OUTPUT_BLT_OPERATION BltOperation, IN size_t SourceX, IN size_t SourceY, IN size_t DestinationX, IN size_t DestinationY, IN size_t Width, IN size_t Height, IN size_t Delta);
+
+typedef struct _EFI_GRAPHICS_OUTPUT_PROTOCOL {
+	EFI_GRAPHICS_OUTPUT_PROTOCOL_QUERY_MODE QueryMode;
+	EFI_GRAPHICS_OUTPUT_PROTOCOL_SET_MODE   SetMode;
+	EFI_GRAPHICS_OUTPUT_PROTOCOL_BLT        Blt;
+	EFI_GRAPHICS_OUTPUT_PROTOCOL_MODE       *Mode;
+} EFI_GRAPHICS_OUTPUT_PROTOCOL;
 
 struct _EFI_FILE_HANDLE;
 
